@@ -9,13 +9,13 @@ class App
     @books = []
   end
 
-  def list_all_books(select = false)
+  def list_all_books(select: false)
     @books.each_with_index do |book, idx|
       puts "#{select ? "#{idx}) ":""}Title: \"#{book.title}\", Author: #{book.author}"
     end
   end
 
-  def list_all_people(select = false)
+  def list_all_people(select: false)
     @people.each_with_index do |person, idx|
       role = person.is_a?(Teacher) ? 'Teacher' : 'Student'
       puts "#{select ? "#{idx}) " : ""}[#{role}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
