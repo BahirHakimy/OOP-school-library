@@ -47,10 +47,10 @@ end
 
 def create_rentals(app)
   puts 'Select a book from the following list by number'
-  app.list_all_books(true)
+  app.list_all_books(select: true)
   book_idx = gets.chomp.to_i
   puts "\nSelect a person from the following list by number (not id)"
-  app.list_all_people(true)
+  app.list_all_people(select: true)
   person_idx = gets.chomp.to_i
   print "\nDate: "
   date = gets.chomp
@@ -81,18 +81,19 @@ def main
   until exit
     show_options
     option = gets.chomp
-    case option
-    when '1' then app.list_all_books
-    when '2' then app.list_all_people
-    when '3' then create_person(app)
-    when '4' then create_book(app)
-    when '5' then create_rentals(app)
-    when '6' then list_rentals(app)
-    when '7'
-      puts 'Thank you for using this app!'
-      exit = true
-    end
-
+    options = {
+      '1' => app.method(:list_all_books),
+      '2' => app.method(:list_all_people),
+      '3' => -> { create_person(app) },
+      '4' => -> { create_book(app) },
+      '5' => -> { create_rentals(app) },
+      '6' => -> { list_rentals(app) },
+      '7' => lambda {
+               puts 'Thank you for using this app!'
+               exit = true
+             }
+    }
+    options[option].call
   end
 end
 
