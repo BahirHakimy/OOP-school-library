@@ -34,15 +34,9 @@ def create_person(app)
   end
 end
 
-def show_options
+def display_menu_options(menu_options)
   puts "\nPlease choose an option by entering a number:"
-  puts '1 - List all books'
-  puts '2 - List all people'
-  puts '3 - Create a person'
-  puts '4 - Create a book'
-  puts '5 - Create a rental'
-  puts '6 - List all rentals for a given person id'
-  puts '7 - Exit'
+  menu_options.each { |key, value| puts "#{key} - #{value[:description]}" }
 end
 
 def create_rentals(app)
@@ -76,24 +70,31 @@ end
 def main
   app = App.new
   exit = false
+  menu_options = {
+    '1' => { description: 'List all books', action: -> { app.list_all_books } },
+    '2' => { description: 'List all people', action: -> { app.list_all_people } },
+    '3' => { description: 'Create a person', action: -> { create_person(app) } },
+    '4' => { description: 'Create a book', action: -> { create_book(app) } },
+    '5' => { description: 'Create a rental', action: -> { create_rentals(app) } },
+    '6' => { description: 'List all rentals for a given person id', action: -> { list_rentals(app) } },
+    '7' => { description: 'Exit', action: -> { exit = true } }
+  }
+
   puts "Welcome to School Library App! \n\n"
 
   until exit
-    show_options
+    display_menu_options(menu_options)
     option = gets.chomp
-    case option
-    when '1' then app.list_all_books
-    when '2' then app.list_all_people
-    when '3' then create_person(app)
-    when '4' then create_book(app)
-    when '5' then create_rentals(app)
-    when '6' then list_rentals(app)
-    when '7'
-      puts 'Thank you for using this app!'
-      exit = true
-    end
 
+    if menu_options.key?(option)
+      menu_options[option][:action].call
+    else
+      puts 'Invalid option'
+    end
   end
+
+  puts 'Thank you for using this app!'
 end
+
 
 main
