@@ -2,9 +2,9 @@ require_relative('./rental')
 class Book
   attr_accessor :title, :author, :rentals
 
-  def initialize(title, _author)
+  def initialize(title, author)
     @title = title
-    @author = author private
+    @author = author
     @rentals = []
   end
 
