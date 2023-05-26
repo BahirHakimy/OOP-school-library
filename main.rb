@@ -1,6 +1,6 @@
 require_relative('./app')
 
-def create_student
+def create_student(app)
   print 'Age: '
   age = gets.chomp
   print 'Name: '
@@ -11,7 +11,7 @@ def create_student
   puts 'Person created successfully'
 end
 
-def create_teacher
+def create_teacher(app)
   print 'Age: '
   age = gets.chomp
   print 'Name: '
@@ -22,13 +22,13 @@ def create_teacher
   puts 'Person created successfully'
 end
 
-def create_person
+def create_person(app)
   print 'Do you want to create a stduent (1) or a teacher (2)? [Input the number]: '
   choice = gets.chomp
   if choice == '1'
-    create_student
+    create_student(app)
   elsif choice == '2'
-    create_teacher
+    create_teacher(app)
   else
     puts 'Invalid choice'
   end
@@ -45,7 +45,7 @@ def show_options
   puts '7 - Exit'
 end
 
-def create_rentals
+def create_rentals(app)
   puts 'Select a book from the following list by number'
   app.list_all_books(true)
   book_idx = gets.chomp.to_i
@@ -58,7 +58,7 @@ def create_rentals
   puts 'Rental created successfully'
 end
 
-def create_book
+def create_book(app)
   print 'Title: '
   title = gets.chomp
   print 'Author: '
@@ -67,7 +67,7 @@ def create_book
   puts 'Book created successfully'
 end
 
-def list_rentals
+def list_rentals(app)
   print 'ID of person: '
   person_id = gets.chomp.to_i
   app.list_rentals_for_person(person_id)
@@ -82,18 +82,12 @@ def main
     show_options
     option = gets.chomp
     case option
-    when '1'
-      app.list_all_books
-    when '2'
-      app.list_all_people
-    when '3'
-      create_person
-    when '4'
-      create_book
-    when '5'
-      create_rentals
-    when '6'
-      list_rentals
+    when '1' then app.list_all_books
+    when '2' then app.list_all_people
+    when '3' then create_person(app)
+    when '4' then create_book(app)
+    when '5' then create_rentals(app)
+    when '6' then list_rentals(app)
     when '7'
       puts 'Thank you for using this app!'
       exit = true
