@@ -86,6 +86,8 @@ ruby main.rb
 - <a href='mailto:bahirhakimy2020@gmail.com' target="_blank"><img alt='Gmail' src='https://img.shields.io/badge/Bahir_Hakimi-100000?style=flat&logo=Gmail&logoColor=FFFFFF&labelColor=FF2C10&color=FF2C10'/></a>
 - <a href='https://twitter.com/bahir_hakimi_' target="_blank"><img alt='Twitter' src='https://img.shields.io/badge/Bahir_Hakimi-100000?style=flat&logo=Twitter&logoColor=FFFFFF&labelColor=0DE3FF&color=0DE3FF'/></a>
 
+👤 **Kola Kolade**
+
 <p align="right"><a href="#readme-top">👆</a></p>
 
 <!-- FUTURE FEATURES -->
