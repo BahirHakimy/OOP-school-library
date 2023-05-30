@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative('./app')
 
 class PersonCreator
@@ -95,10 +97,9 @@ class LibraryActions
 end
 
 class Main
-  def initialize
-    @app = App.new
-    @library = LibraryActions.new(@app)
-    @persons = PersonCreator.new(@app)
+  def initialize(library_actions, person_creator)
+    @library_actions = library_actions
+    @person_creator = person_creator
     @exit = false
   end
 
@@ -107,23 +108,37 @@ class Main
     until @exit
       show_options
       option = gets.chomp
-      options = {
-        '1' => @library.method(:list_all_books),
-        '2' => @library.method(:list_all_people),
-        '3' => @persons.method(:create_person),
-        '4' => @library.method(:create_book),
-        '5' => @library.method(:create_rentals),
-        '6' => @library.method(:list_rentals),
-        '7' => lambda {
-                 puts 'Thank you for using this app!'
-                 @exit = true
-               }
-      }
-      options[option].call
+      handle_option(option)
     end
   end
 
   private
+
+  def handle_option(option)
+    case option
+    when '1'
+      @library_actions.list_all_books
+    when '2'
+      @library_actions.list_all_people
+    when '3'
+      @person_creator.create_person
+    when '4'
+      @library_actions.create_book
+    when '5'
+      @library_actions.create_rentals
+    when '6'
+      @library_actions.list_rentals
+    when '7'
+      exit_app
+    else
+      puts 'Invalid option. Please try again.'
+    end
+  end
+
+  def exit_app
+    puts 'Thank you for using this app!'
+    @exit = true
+  end
 
   def show_options
     puts "\nPlease choose an option by entering a number:"
@@ -137,4 +152,7 @@ class Main
   end
 end
 
-Main.new.start
+library_actions = LibraryActions.new(app)
+person_creator = PersonCreator.new(app)
+main = Main.new(library_actions, person_creator)
+main.start
