@@ -51,14 +51,10 @@ class LibraryActions
 
   def create_rentals
     puts 'Select a book from the following list by number'
-    puts '========================================================================='
     @app.list_all_books(select: true)
-    puts '========================================================================='
     book_idx = gets.chomp.to_i
     puts "\nSelect a person from the following list by number (not id)"
-    puts '========================================================================='
     @app.list_all_people(select: true)
-    puts '========================================================================='
     person_idx = gets.chomp.to_i
     print "\nDate: "
     date = gets.chomp
@@ -67,15 +63,11 @@ class LibraryActions
   end
 
   def list_all_books
-    puts '========================================================================='
     @app.list_all_books
-    puts '========================================================================='
   end
 
   def list_all_people
-    puts '========================================================================='
     @app.list_all_people
-    puts '========================================================================='
   end
 
   def create_book
@@ -115,24 +107,13 @@ class Main
   private
 
   def handle_option(option)
-    case option
-    when '1'
-      @library_actions.list_all_books
-    when '2'
-      @library_actions.list_all_people
-    when '3'
-      @person_creator.create_person
-    when '4'
-      @library_actions.create_book
-    when '5'
-      @library_actions.create_rentals
-    when '6'
-      @library_actions.list_rentals
-    when '7'
-      exit_app
-    else
-      puts 'Invalid option. Please try again.'
-    end
+    options = {
+      '1' => @library_actions.method(:list_all_books), '2' => @library_actions.method(:list_all_people),
+      '3' => @person_creator.method(:create_person), '4' => @library_actions.method(:create_book),
+      '5' => @library_actions.method(:create_rentals), '6' => @library_actions.method(:list_rentals),
+      '7' => -> { exit_app }
+    }
+    puts options[option].nil? ? 'Invalid option, please try again.' : options[option].call
   end
 
   def exit_app
@@ -152,6 +133,7 @@ class Main
   end
 end
 
+app = App.new
 library_actions = LibraryActions.new(app)
 person_creator = PersonCreator.new(app)
 main = Main.new(library_actions, person_creator)
