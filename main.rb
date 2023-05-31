@@ -1,4 +1,4 @@
-require_relative('./all_operations')
+require_relative('./src/operations/all_operations')
 
 def show_options
   puts "\nPlease choose an option by entering a number:"

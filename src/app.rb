@@ -1,7 +1,7 @@
-require_relative('./book')
-require_relative('./student')
-require_relative('./teacher')
-require_relative('./rental')
+require_relative('./library/book')
+require_relative('./library/teacher')
+require_relative('./library/rental')
+require_relative('./person/student')
 
 class App
   def initialize

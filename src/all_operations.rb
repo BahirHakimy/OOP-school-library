@@ -1,6 +1,6 @@
 require_relative('./app')
-require_relative('./library_operations')
-require_relative('./person_operations')
+require_relative('./operations/library_operations')
+require_relative('./operations/person_operations')
 
 class AllOperations
   def initialize
