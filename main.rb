@@ -24,7 +24,7 @@ def handle_option(option, operations)
   options[option]&.call
 end
 
-def goodBye(operations)
+def good_bye(operations)
   operations.exit
   puts 'Thank you for using this app!'
 end
