@@ -39,7 +39,7 @@ def main
     handle_option(option, operations) if option.to_i.between?(1, 6)
     exit = true if option == '7'
   end
-  goodBye
+  good_bye(operations)
 end
 
 main
