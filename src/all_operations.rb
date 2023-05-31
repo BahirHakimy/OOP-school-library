@@ -32,4 +32,8 @@ class AllOperations
   def create_person
     @person.create_person
   end
+
+  def exit
+    @app.before_exit
+  end
 end
