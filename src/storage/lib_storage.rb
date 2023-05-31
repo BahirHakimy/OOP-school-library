@@ -1,4 +1,3 @@
-
 require_relative './storage'
 require_relative '../person/student'
 require_relative '../person/teacher'
