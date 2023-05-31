@@ -1,12 +1,15 @@
-require_relative('./library/book')
-require_relative('./library/teacher')
-require_relative('./library/rental')
-require_relative('./person/student')
+require_relative './library/book'
+require_relative './library/rental'
+require_relative './person/teacher'
+require_relative './person/student'
+require_relative './storage/lib_storage'
 
 class App
   def initialize
-    @people = []
-    @books = []
+    @storage = LibraryStorage.new
+    @people = @storage.load_poeple
+    @books = @storage.load_books
+    @rentals = @storage.load_rentals(@people, @books)
   end
 
   def list_all_books(select: false)
@@ -41,7 +44,7 @@ class App
   def create_rental(book_id, person_id, date)
     book = @books[book_id]
     person = @people[person_id]
-    person.add_rental(book, date)
+    @rentals << person.add_rental(book, date)
   end
 
   def list_rentals_for_person(person_id)
@@ -54,5 +57,11 @@ class App
     person.rentals.each do |rental|
       puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}"
     end
+  end
+
+  def before_exit
+    @storage.save_poeple(@people)
+    @storage.save_books(@books)
+    @storage.save_rentals(@rentals)
   end
 end

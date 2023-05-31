@@ -8,4 +8,8 @@ class Rental
     @book = book
     book.rentals << self
   end
+
+  def to_hash
+    { date: @date, person: @person.name, book: @book.title }
+  end
 end

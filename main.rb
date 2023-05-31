@@ -1,4 +1,5 @@
-require_relative('./src/operations/all_operations')
+require_relative('./src/all_operations')
+require_relative('./src/storage/storage')
 
 def show_options
   puts "\nPlease choose an option by entering a number:"
@@ -23,6 +24,11 @@ def handle_option(option, operations)
   options[option]&.call
 end
 
+def goodBye(operations)
+  operations.exit
+  puts 'Thank you for using this app!'
+end
+
 def main
   puts "Welcome to School Library App! \n\n"
   exit = false
@@ -33,7 +39,7 @@ def main
     handle_option(option, operations) if option.to_i.between?(1, 6)
     exit = true if option == '7'
   end
-  puts 'Thank you for using this app!'
+  goodBye
 end
 
 main
