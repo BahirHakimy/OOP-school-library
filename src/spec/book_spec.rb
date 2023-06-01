@@ -1,9 +1,11 @@
-require_relative('./rental')
+require_relative '../library/book'
+require_relative '../library/rental'
 require 'rspec'
+require 'date'
 
 describe Book do
   let(:book) { Book.new("Title", "Author") }
-  let(:person) { double("Person") }
+  let(:person) { double("Person", rentals: []) }
   let(:date) { Date.new(2023, 1, 1) }
 
   describe "#initialize" do
