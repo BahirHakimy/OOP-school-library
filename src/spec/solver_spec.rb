@@ -15,5 +15,12 @@ describe Solver do
         expect(result_for_one).to eq 1
       end
     end
+
+    context 'when input is a negative number' do
+      it 'should raise error' do
+        num = -1
+        expect { subject.factorial(num) }.to raise_error(ArgumentError)
+      end
+    end
   end
 end
