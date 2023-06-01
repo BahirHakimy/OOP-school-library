@@ -22,13 +22,13 @@ describe Teacher do
     end
 
     it 'should return the correct hash using to_hash method' do
-      expected_hash = {age:25, specialization:'Physics', name:'John Doe', type:'teacher'}
+      expected_hash = { age: 25, specialization: 'Physics', name: 'John Doe', type: 'teacher' }
       hash = teacher.to_hash
       expect(hash).to eql expected_hash
     end
 
     it 'should create a valid instance from given hash' do
-      instance_hash = {age:35, specialization:'Mathimatics', name:'John Doe', type:'teacher'}
+      instance_hash = { age: 35, specialization: 'Mathimatics', name: 'John Doe', type: 'teacher' }
       teacher_instance = Teacher.from_hash(instance_hash)
 
       expect(teacher_instance).to be_an_instance_of(Teacher)
