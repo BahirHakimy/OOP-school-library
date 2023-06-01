@@ -23,4 +23,15 @@ describe Solver do
       end
     end
   end
+
+  describe 'reverse' do
+    context 'should reverse the word' do
+      it 'returns olleh for word hello' do
+        word = 'hello'
+        expected_result = 'olleh'
+        result = subject.reverse(word)
+        expect(result).to eql expected_result
+      end
+    end
+  end
 end
